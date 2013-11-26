@@ -134,27 +134,38 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>osxappbundle-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
-				<configuration>
-					<mainClass>org.phlo.AirReceiver.AirReceiver</mainClass>
-					<iconFile>${basedir}/src/main/resources/icon.icns</iconFile>
-					<!--  Created by interpolate-infoplist above -->
-					<dictionaryFile>${project.build.directory}/Info.plist</dictionaryFile>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>bundle</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
+
+  <profiles>
+    <profile>
+      <id>mac-bundle</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>osxappbundle-maven-plugin</artifactId>
+            <version>1.0-alpha-2</version>
+            <configuration>
+              <mainClass>org.phlo.AirReceiver.AirReceiver</mainClass>
+              <iconFile>${basedir}/src/main/resources/icon.icns</iconFile>
+              <!--  Created by interpolate-infoplist above -->
+              <dictionaryFile>${project.build.directory}/Info.plist
+              </dictionaryFile>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>bundle</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 	<repositories>
 		<repository>
